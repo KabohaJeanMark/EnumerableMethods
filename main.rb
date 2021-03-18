@@ -49,8 +49,10 @@ module Enumerable
     end
   end
 
-  def my_map(&my_proc)
+  def my_map(&_my_proc)
     arr = []
+    return self unless block_given?
+
     my_each { |item| arr.push yield(item) }
     arr
   end
