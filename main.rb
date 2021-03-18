@@ -22,11 +22,14 @@ module Enumerable
   end
 end
 
-# example to show my_each is working
+puts '------ my_each method example---------'
 [1, 2, 3].my_each { |num| puts num * 2 }
+puts
 
-# example to show my_each_with_index is working
+puts '------ my_each_with_index method example---------'
 [1, 2, 3].my_each_with_index { |n, i| puts "the item is #{n} and the index is #{i}" }
+puts
 
+puts '------ my_select method example---------'
 example_select = %w[Shaher jean mark Jordy Stranger].my_select { |name| name != 'Stranger' }
 puts example_select
