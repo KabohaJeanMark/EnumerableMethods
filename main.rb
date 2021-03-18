@@ -48,6 +48,12 @@ module Enumerable
       selected_arr.size
     end
   end
+
+  def my_map
+    arr = []
+    my_each { |item| arr.push yield(item) }
+    arr
+  end
 end
 
 puts '------ my_each method example---------'
@@ -81,3 +87,7 @@ puts example_count
 puts '------ my_count? method example no args passed---------'
 example_count = [2, 8, 3, 2, 6, 8].my_count
 puts example_count
+
+puts '------ my_map method example---------'
+example_count = [2, 4, 5, 1, 7, 6, 8].my_map { |n| n + 10 }
+p example_count
