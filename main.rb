@@ -55,12 +55,16 @@ module Enumerable
     arr
   end
 
-  def my_inject(acc = 0)
+  def my_inject(acc)
     to_a.my_each do |x|
       acc = yield(acc, x)
     end
     acc
   end
+end
+
+def multiply_els(arr)
+  arr.my_inject(1) { |p, i| p * i }
 end
 
 puts '------ my_each method example---------'
@@ -100,5 +104,8 @@ example_count = [2, 4, 5, 1, 7, 6, 8].my_map { |n| n + 10 }
 p example_count
 
 puts '------ my_inject method example---------'
-injected_example = (5..10).my_inject { |sum, n| sum + n }
+injected_example = (5..10).my_inject(0) { |sum, n| sum + n }
 p injected_example
+
+puts '------ multiply_els method example---------'
+p multiply_els([2, 3, 2])
