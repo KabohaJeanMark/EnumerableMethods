@@ -32,6 +32,12 @@ module Enumerable
     to_a.my_each { |item| selected_arr.push(item) if yield item }
     selected_arr.size.positive?
   end
+
+  def my_none?
+    selected_arr = []
+    to_a.my_each { |item| selected_arr.push(item) if yield item }
+    selected_arr.size != size
+  end
 end
 
 puts '------ my_each method example---------'
@@ -53,3 +59,7 @@ puts example_all
 puts '------ my_any? method example---------'
 example_any = [11, 15, 17, 21].my_any?(&:even?)
 puts example_any
+
+puts '------ my_none? method example---------'
+example_none = [6, 8, 4, 2].my_none?(&:odd?)
+puts example_none
