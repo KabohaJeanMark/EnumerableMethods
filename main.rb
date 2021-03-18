@@ -38,6 +38,16 @@ module Enumerable
     to_a.my_each { |item| selected_arr.push(item) if yield item }
     selected_arr.size != size
   end
+
+  def my_count(num = nil)
+    if num.nil?
+      size
+    else
+      selected_arr = []
+      to_a.my_each { |item| selected_arr.push(item) if item == num }
+      selected_arr.size
+    end
+  end
 end
 
 puts '------ my_each method example---------'
@@ -63,3 +73,11 @@ puts example_any
 puts '------ my_none? method example---------'
 example_none = [6, 8, 4, 2].my_none?(&:odd?)
 puts example_none
+
+puts '------ my_count? method example---------'
+example_count = [2, 8, 3, 2, 6, 8].my_count(2)
+puts example_count
+
+puts '------ my_count? method example no args passed---------'
+example_count = [2, 8, 3, 2, 6, 8].my_count
+puts example_count
