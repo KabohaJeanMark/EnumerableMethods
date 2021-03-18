@@ -1,5 +1,5 @@
-# ruby-linter
-A template with linters set up for easy development and reuse when working on new ruby projects.
+# Enumerable methods
+A series of short methods written as algorithms to mimick the performance of Ruby's enum methods as per Odin Project Enum Assignment 2.
 
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
@@ -9,8 +9,7 @@ A template with linters set up for easy development and reuse when working on ne
 
 ## Live Demo on Repl
 
-[View on Repl]()
-
+[View on Repl](https://replit.com/@JeanKairumba/Enumerable-methods)
 
 ### Prerequisites
 - A computer with ruby installed.
@@ -35,6 +34,11 @@ ruby main.rb
 
 - GitHub: [@githubhandle](https://github.com/KabohaJeanMark)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/jean-mark-kaboha-software-engineer/)
+
+👤 **Shaher**
+
+- GitHub: [@shaher-shamroukh](https://github.com/Shaher-11/ )
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/shaher-shamroukh/ )
 
 ## 🤝 Contributing
 
