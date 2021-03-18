@@ -49,7 +49,7 @@ module Enumerable
     end
   end
 
-  def my_map
+  def my_map(&my_proc)
     arr = []
     my_each { |item| arr.push yield(item) }
     arr
