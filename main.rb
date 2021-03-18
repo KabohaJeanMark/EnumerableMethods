@@ -26,6 +26,12 @@ module Enumerable
     to_a.my_each { |item| selected_arr.push(item) if yield item }
     selected_arr.size == size
   end
+
+  def my_any?
+    selected_arr = []
+    to_a.my_each { |item| selected_arr.push(item) if yield item }
+    selected_arr.size.positive?
+  end
 end
 
 puts '------ my_each method example---------'
@@ -43,3 +49,7 @@ puts example_select
 puts '------ my_all? method example---------'
 example_all = %w[cat bat bird wings].my_all? { |name| name.size >= 3 }
 puts example_all
+
+puts '------ my_any? method example---------'
+example_any = [11, 15, 17, 21].my_any?(&:even?)
+puts example_any
