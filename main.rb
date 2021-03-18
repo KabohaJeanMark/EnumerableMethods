@@ -54,6 +54,13 @@ module Enumerable
     my_each { |item| arr.push yield(item) }
     arr
   end
+
+  def my_inject(acc = 0)
+    to_a.my_each do |x|
+      acc = yield(acc, x)
+    end
+    acc
+  end
 end
 
 puts '------ my_each method example---------'
@@ -91,3 +98,7 @@ puts example_count
 puts '------ my_map method example---------'
 example_count = [2, 4, 5, 1, 7, 6, 8].my_map { |n| n + 10 }
 p example_count
+
+puts '------ my_inject method example---------'
+injected_example = (5..10).my_inject { |sum, n| sum + n }
+p injected_example
