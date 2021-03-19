@@ -33,7 +33,7 @@ module Enumerable
     elsif argm.nil?
       to_a.my_each { |i| return false if i.nil? || i == false }
     elsif argm.is_a? Class
-      to_a.my_each { |i| return false if !i.is_a?(argm) }
+      to_a.my_each { |i| return false unless i.is_a?(argm) }
       return true
     elsif !argm.nil? && argm.instance_of?(Regexp)
       to_a.my_each { |i| return false unless argm.match(i) }
@@ -50,7 +50,7 @@ module Enumerable
     elsif argm.nil?
       to_a.my_each { |i| return true if i.nil? || i == true }
     elsif !argm.nil? && (argm.is_a? Class)
-      to_a.my_each { |i| return true if i.is_a?(argm)}
+      to_a.my_each { |i| return true if i.is_a?(argm) }
     elsif !argm.nil? && argm.instance_of?(Regexp)
       to_a.my_each { |i| return true if argm.match(i) }
     else
@@ -60,7 +60,20 @@ module Enumerable
   end
 
   def my_none?(argm = nil, &block)
-    !my_any?(argm, &block)
+    item = false
+
+    selcted_arr = if !argm
+
+                    block_given? ? select(&block) : select { |i| i }
+                  elsif argm.is_a?(Regexp)
+                    select { |i| argm.match(i) }
+                  elsif argm.is_a?(Class)
+                    select { |i| i.class <= argm }
+                  else
+                    select { |i| i == argm }
+                  end
+    item = true if selcted_arr.to_a.empty?
+    item
   end
 
   def my_count(num = nil)
