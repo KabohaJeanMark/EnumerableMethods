@@ -58,10 +58,8 @@ module Enumerable
     false
   end
 
-  def my_none?
-    selected_arr = []
-    to_a.my_each { |item| selected_arr.push(item) if yield item }
-    selected_arr.size != size
+  def my_none?(argm = nil, &block)
+    !my_any?(argm, &block)
   end
 
   def my_count(num = nil)
