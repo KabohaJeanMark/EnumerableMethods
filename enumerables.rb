@@ -78,12 +78,18 @@ module Enumerable
     end
   end
 
-  def my_map(&_my_proc)
-    arr = []
-    return self unless block_given?
+  def my_map(argm = nil)
+    return to_enum if !block_given? && !argm
 
-    my_each { |item| arr.push yield(item) }
-    arr
+    items = clone.to_a
+    items.my_each_with_index do |item, i|
+      items[i] = if argm
+                   argm.call(item)
+                 else
+                   yield item
+                 end
+    end
+    items
   end
 
   def my_inject(argm = nil, symbl = nil)
