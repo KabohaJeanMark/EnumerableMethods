@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -30,21 +31,31 @@ module Enumerable
       to_a.my_each { |item| return false if yield(item) == false }
       return true
     elsif argm.nil?
-      to_a.my_each { |_i| return false if n.nil? || n == false }
+      to_a.my_each { |i| return false if i.nil? || i == false }
     elsif !argm.nil? && (argm.is_a? Class)
-      to_a.my_each { |_i| return false if n.class != argm }
+      to_a.my_each { |i| return false if i.class != argm }
     elsif !argm.nil? && argm.instance_of?(Regexp)
-      to_a.my_each { |_i| return false unless argm.match(n) }
+      to_a.my_each { |i| return false unless argm.match(i) }
     else
-      to_a.my_each { |_i| return false if n != argm }
+      to_a.my_each { |i| return false if i != argm }
     end
     true
   end
 
-  def my_any?
-    selected_arr = []
-    to_a.my_each { |item| selected_arr.push(item) if yield item }
-    selected_arr.size.positive?
+  def my_any?(argm = nil)
+    if block_given?
+      to_a.my_each { |item| return true if yield(item) }
+      return false
+    elsif argm.nil?
+      to_a.my_each { |i| return true if i.nil? || i == true }
+    elsif !argm.nil? && (argm.is_a? Class)
+      to_a.my_each { |i| return true if i.instance_of?(argm) }
+    elsif !argm.nil? && argm.instance_of?(Regexp)
+      to_a.my_each { |i| return true if argm.match(i) }
+    else
+      to_a.my_each { |i| return true if i == argm }
+    end
+    false
   end
 
   def my_none?
@@ -125,3 +136,5 @@ p injected_example
 
 puts '------ multiply_els method example---------'
 p multiply_els([2, 3, 2])
+
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
