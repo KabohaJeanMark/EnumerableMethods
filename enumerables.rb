@@ -5,19 +5,23 @@ module Enumerable
 
     i = 0
     until i == size
-      yield(self[i])
+      yield to_a[i]
       i += 1
     end
+
+    self
   end
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
     i = 0
-    until i == size
-      yield(self[i], i)
+    my_each do |element|
+      yield(element, i)
       i += 1
     end
+
+    self
   end
 
   def my_select
