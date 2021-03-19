@@ -25,10 +25,20 @@ module Enumerable
     selected_arr
   end
 
-  def my_all?
-    selected_arr = []
-    to_a.my_each { |item| selected_arr.push(item) if yield item }
-    selected_arr.size == size
+  def my_all?(argm = nil)
+    if block_given?
+      to_a.my_each { |item| return false if yield(item) == false }
+      return true
+    elsif argm.nil?
+      to_a.my_each { |_i| return false if n.nil? || n == false }
+    elsif !argm.nil? && (argm.is_a? Class)
+      to_a.my_each { |_i| return false if n.class != argm }
+    elsif !argm.nil? && argm.instance_of?(Regexp)
+      to_a.my_each { |_i| return false unless argm.match(n) }
+    else
+      to_a.my_each { |_i| return false if n != argm }
+    end
+    true
   end
 
   def my_any?
