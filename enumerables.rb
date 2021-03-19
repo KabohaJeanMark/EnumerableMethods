@@ -68,13 +68,19 @@ module Enumerable
     !my_any?(argm, &block)
   end
 
-  def my_count(num = nil)
-    if num.nil?
-      size
+  def my_count(argm = nil)
+    if argm
+      selected = my_select { |element| element == argm }
+      selected.size
     else
-      selected_arr = []
-      to_a.my_each { |item| selected_arr.push(item) if item == num }
-      selected_arr.size
+      return to_a.size unless block_given?
+
+      i = 0
+
+      my_each do |_element|
+        yield(el) && i += 1
+      end
+      i
     end
   end
 
