@@ -50,7 +50,7 @@ module Enumerable
     elsif argm.nil?
       to_a.my_each { |i| return true if i.nil? || i == true }
     elsif !argm.nil? && (argm.is_a? Class)
-      to_a.my_each { |i| return true if i.instance_of?(argm) }
+      to_a.my_each { |i| return true if i.is_a?(argm)}
     elsif !argm.nil? && argm.instance_of?(Regexp)
       to_a.my_each { |i| return true if argm.match(i) }
     else
