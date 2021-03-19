@@ -25,6 +25,8 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     selected_arr = []
     to_a.my_each { |item| selected_arr.push(item) if yield item }
     selected_arr
@@ -84,11 +86,36 @@ module Enumerable
     arr
   end
 
-  def my_inject(acc)
-    to_a.my_each do |x|
-      acc = yield(acc, x)
+  def my_inject(argm = nil, symbl = nil)
+    selcted = ''
+    if argm.class <= Symbol || (symbl.class <= Symbol and argm)
+      if symbl.nil?
+        i = 1
+        selcted = to_a[0]
+        while i < to_a.size
+          selcted = selcted.send(argm, to_a[i])
+          i += 1
+        end
+      else
+        selcted = argm
+        my_each { |element| selcted = selcted.send(symbl, element) }
+      end
+    elsif block_given?
+      if argm
+        selcted = argm
+        to_a.my_each { |element| selcted = yield(selcted, element) }
+      else
+        i = 1
+        selcted = to_a[0]
+        while i < to_a.size
+          selcted = yield(selcted, to_a[i])
+          i += 1
+        end
+      end
+    else
+      raise LocalJumpError, 'no block given'
     end
-    acc
+    selcted
   end
 end
 

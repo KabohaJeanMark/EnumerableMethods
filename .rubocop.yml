@@ -5,12 +5,15 @@ AllCops:
     - "Rakefile"
     - "node_modules/**/*"
 
+Metrics/ModuleLength:
+  Enabled: false
+
   DisplayCopNames: true
 
 Layout/LineLength:
   Max: 120
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
 Metrics/AbcSize:
   Max: 50
 Metrics/ClassLength:
