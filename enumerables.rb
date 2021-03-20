@@ -54,7 +54,7 @@ module Enumerable
       to_a.my_each { |item| return true if yield(item) }
       return false
     elsif argm.nil?
-      to_a.my_each { |i| return true if i}
+      to_a.my_each { |i| return true if i }
     elsif !argm.nil? && (argm.is_a? Class)
       to_a.my_each { |i| return true if i.is_a?(argm) }
     elsif !argm.nil? && argm.instance_of?(Regexp)
