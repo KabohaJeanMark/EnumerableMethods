@@ -91,8 +91,8 @@ module Enumerable
 
       i = 0
 
-      my_each do |_element|
-        yield(el) && i += 1
+      my_each do |element|
+        yield(element) && i += 1
       end
       i
     end
